@@ -1,3 +1,4 @@
+import unicodedata
 from . import db
 
 
@@ -16,7 +17,7 @@ class UserProfile(db.Model):
     def is_authenticated(self):
         return True
 
-    def is_active(self):
+    def is_active(self):    
         return True
 
     def is_anonymous(self):
@@ -24,7 +25,7 @@ class UserProfile(db.Model):
 
     def get_id(self):
         try:
-            return unicode(self.id)  # python 2 support
+            return unicodedata(self.id)  # python 2 support
         except NameError:
             return str(self.id)  # python 3 support
 
