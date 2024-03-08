@@ -13,7 +13,6 @@ from werkzeug.security import check_password_hash
 def get_uploaded_images():
     rootdir = os.path.join(os.getcwd(),(app.config['UPLOAD_FOLDER']))
     uploaded_images = []
-
     for subdir, dirs, files in os.walk(rootdir):
         for file in files:
             uploaded_images.append(file)
@@ -85,14 +84,14 @@ def login():
 
 @app.route('/uploads/<filename>')
 def get_image(filename):
-    return send_from_directory(os.path.join(os.getcwd), app.config['UPLOAD_FOLDER'],
-filename)
+    rootdir = os.getcwd
+    return send_from_directory(os.path.join(rootdir, app.config['UPLOAD_FOLDER']),filename)
 
 @app.route('/files')
 @login_required
 def files():
     images_filenames = get_uploaded_images()
-    image_urls = [url_for('uploaded_file', filename=filename) for filename in images_filenames]
+    image_urls = [url_for('get_image', filename=filename) for filename in images_filenames]
     return render_template('files.html', image_urls=image_urls)
 
 
