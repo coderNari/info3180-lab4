@@ -49,7 +49,8 @@ def upload():
         
         flash('File Saved', 'success')
         return redirect(url_for('home')) # Update this to redirect the user to a route that displays all uploaded image files
-    
+    else:
+        flash_errors(form)
     return render_template('upload.html', form=form)
 
 
@@ -75,7 +76,7 @@ def login():
             login_user(user)
 
             # Remember to flash a message to the user
-            flash("Login Succesful", 'success')
+            flash("Login Successful", 'success')
             return redirect(url_for("upload"))  # The user should be redirected to the upload form instead
         else:
             flash("Invalid username or password", "error")
@@ -94,7 +95,12 @@ def files():
     image_urls = [url_for('get_image', filename=filename) for filename in images_filenames]
     return render_template('files.html', image_urls=image_urls)
 
-
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('home'))
 
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <h1>Uploaded Images</h1>
+    <h2>Uploaded Images</h2>
     <ul class="image-grid">
         {% for image_url in image_urls %}
             <li>
                 <!-- <img src="{{url_for('static', filename='css/web-dev.jpg')}}" -->
-                <img src="{{url_for('get_image',filename='image_url') }}" alt="image">
+                <img src="{{url_for('get_image',filename='image_url')}}" alt="image">
             </li>
         {% endfor %}
     </ul>
