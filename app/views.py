@@ -89,6 +89,7 @@ def get_image(filename):
 filename)
 
 @app.route('/files')
+@login_required
 def files():
     images_filenames = get_uploaded_images()
     image_urls = [url_for('uploaded_file', filename=filename) for filename in images_filenames]

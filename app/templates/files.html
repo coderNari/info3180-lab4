@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>Uploaded Images</h1>
+    <ul class="image-grid">
+        {% for image_url in image_urls %}
+            <li>
+                <img src="{{ image_url }}" alt="image">
+            </li>
+    </ul>
+
+{% endblock %}
